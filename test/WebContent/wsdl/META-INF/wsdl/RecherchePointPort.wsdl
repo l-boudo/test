@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:ope="http://www.enedis.fr/sge/b2b/services/rechercherpoint/v2.0" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tec="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:tns="http://www.enedis.fr/sge/b2b/services" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" name="RecherchePoint-V2.0" targetNamespace="http://www.enedis.fr/sge/b2b/services">
+	<wsdl:types>
+		<xs:schema>
+			<xs:import namespace="http://www.enedis.fr/sge/b2b/services/rechercherpoint/v2.0" schemaLocation="RechercherPoint-v2.0.xsd"/>
+			<xs:import namespace="http://www.enedis.fr/sge/b2b/technique/v1.0" schemaLocation="../../Dictionnaires/Technique/ENEDIS.Dictionnaire.Technique.v1.0.xsd"/>
+		</xs:schema>
+	</wsdl:types>
+	<!-- Messages -->
+	<wsdl:message name="rechercherPoint">
+		<wsdl:part element="ope:rechercherPoint" name="rechercherPoint"/>
+	</wsdl:message>
+	<wsdl:message name="rechercherPointResponse">
+		<wsdl:part element="ope:rechercherPointResponse" name="rechercherPointResponse"/>
+	</wsdl:message>
+	<!-- Erreur -->
+  <wsdl:message name="erreur">
+    <wsdl:part element="tec:erreur" name="Erreur"/>
+  </wsdl:message>
+  	<!-- Entete -->
+	<wsdl:message name="entete">
+		<wsdl:part element="tec:entete" name="entete"/>
+	</wsdl:message>
+	<!-- EnteteRetour -->
+	<wsdl:message name="acquittement">
+		<wsdl:part element="tec:acquittement" name="acquittement"/>
+	</wsdl:message>
+	<!-- portType -->
+	<wsdl:portType name="RecherchePointPortType">
+		<wsdl:operation name="rechercherPoint">
+			<wsdl:input message="tns:rechercherPoint" name="rechercherPoint"/>
+			<wsdl:output message="tns:rechercherPointResponse" name="rechercherPointResponse"/>
+			<wsdl:fault message="tns:erreur" name="erreur"/>
+		</wsdl:operation>
+	</wsdl:portType> 
+	<!-- binding -->
+	<wsdl:binding name="RecherchePointBinding" type="tns:RecherchePointPortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<!-- rechercherPoint -->
+		<wsdl:operation name="rechercherPoint">
+			<soap:operation soapAction="" style="document"/>
+			<wsdl:input name="rechercherPoint">
+				<soap:body use="literal"/>
+				<soap:header message="tns:entete" part="entete" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="rechercherPointResponse">
+				<soap:body use="literal"/>
+				<soap:header message="tns:acquittement" part="acquittement" use="literal"/>
+			</wsdl:output>
+	  		<wsdl:fault name="erreur">
+				<soap:fault name="erreur" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<!-- service -->
+	<wsdl:service name="RecherchePointV2.0">
+		<wsdl:port binding="tns:RecherchePointBinding" name="RecherchePointPort">
+			<soap:address location="http://localhost:8082/test/services/RecherchePointPort"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

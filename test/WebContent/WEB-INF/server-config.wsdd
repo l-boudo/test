@@ -1,0 +1,92 @@
+<ns1:deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java" xmlns:ns1="http://xml.apache.org/axis/wsdd/">
+ <ns1:globalConfiguration>
+  <ns1:parameter name="sendMultiRefs" value="true"/>
+  <ns1:parameter name="disablePrettyXML" value="true"/>
+  <ns1:parameter name="adminPassword" value="admin"/>
+  <ns1:parameter name="attachments.Directory" value="/home/x1-l/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/test/WEB-INF/attachments"/>
+  <ns1:parameter name="dotNetSoapEncFix" value="true"/>
+  <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
+  <ns1:parameter name="sendXMLDeclaration" value="true"/>
+  <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
+  <ns1:requestFlow>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="session"/>
+   </ns1:handler>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="request"/>
+    <ns1:parameter name="extension" value=".jwr"/>
+   </ns1:handler>
+  </ns1:requestFlow>
+ </ns1:globalConfiguration>
+ <ns1:handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper"/>
+ <ns1:handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
+ <ns1:handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
+ <ns1:service name="AdminService" provider="java:MSG">
+  <ns1:parameter name="allowedMethods" value="AdminService"/>
+  <ns1:parameter name="enableRemoteAdmin" value="false"/>
+  <ns1:parameter name="className" value="org.apache.axis.utils.Admin"/>
+  <ns1:namespace>http://xml.apache.org/axis/wsdd/</ns1:namespace>
+ </ns1:service>
+ <ns1:service name="Version" provider="java:RPC">
+  <ns1:parameter name="allowedMethods" value="getVersion"/>
+  <ns1:parameter name="className" value="org.apache.axis.Version"/>
+ </ns1:service>
+ <ns1:service name="RecherchePointPort" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:parameter name="allowedMethods" value="*"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="RecherchePointPortType"/>
+  <ns1:parameter name="className" value="fr.enedis.www.sge.b2b.services.RecherchePointBindingSkeleton"/>
+  <ns1:parameter name="wsdlServicePort" value="RecherchePointPort"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://www.enedis.fr/sge/b2b/services"/>
+  <ns1:parameter name="wsdlServiceElement" value="RecherchePointV2.0"/>
+  <ns1:parameter name="schemaUnqualified" value="http://www.enedis.fr/sge/b2b/technique/v1.0,http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/dc,http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/ds,http://www.enedis.fr/sge/b2b/services/rechercherpoint/v2.0,http://schemas.xmlsoap.org/soap/envelope/"/>
+  <ns2:typeMapping deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" qname="ns1:DemandeurAppelIdType" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory" type="java:org.apache.axis.types.NormalizedString" xmlns:ns1="http://www.enedis.fr/sge/b2b/technique/v1.0" xmlns:ns2="http://xml.apache.org/axis/wsdd/"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" qname="ns2:PointIdType" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory" type="java:org.apache.axis.types.NormalizedString" xmlns:ns2="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/ds"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" qname="ns3:ResultatLibelleType" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory" type="java:org.apache.axis.types.NormalizedString" xmlns:ns3="http://www.enedis.fr/sge/b2b/technique/v1.0"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns4:CriteresType" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:fr.enedis.www.sge.b2b.services.rechercherpoint.v2_0.CriteresType" xmlns:ns4="http://www.enedis.fr/sge/b2b/services/rechercherpoint/v2.0"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" qname="ns5:ObjetIdType" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory" type="java:org.apache.axis.types.NormalizedString" xmlns:ns5="http://www.enedis.fr/sge/b2b/technique/v1.0"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns6:PointType" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:fr.enedis.www.sge.b2b.services.rechercherpoint.v2_0.PointType" xmlns:ns6="http://www.enedis.fr/sge/b2b/services/rechercherpoint/v2.0"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns7:InfoFonctionnellesType" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:fr.enedis.www.sge.b2b.technique.v1_0.InfoFonctionnellesType" xmlns:ns7="http://www.enedis.fr/sge/b2b/technique/v1.0"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" qname="ns8:AdresseAfnorLigneType" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory" type="java:org.apache.axis.types.NormalizedString" xmlns:ns8="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/ds"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" qname="ns9:DemandeurAdresseEmailType" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory" type="java:org.apache.axis.types.NormalizedString" xmlns:ns9="http://www.enedis.fr/sge/b2b/technique/v1.0"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns10:AdresseAfnorType" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:fr.enedis.www.sge.b2b.dictionnaire.v5_0.dc.AdresseAfnorType" xmlns:ns10="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/dc"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" qname="ns11:Chaine255Type" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory" type="java:org.apache.axis.types.NormalizedString" xmlns:ns11="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/ds"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" qname="ns12:CommuneFranceCodeInseeType" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory" type="java:org.apache.axis.types.NormalizedString" xmlns:ns12="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/ds"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" qname="ns13:DemandeurRefFrnType" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory" type="java:org.apache.axis.types.NormalizedString" xmlns:ns13="http://www.enedis.fr/sge/b2b/technique/v1.0"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory" encodingStyle="" qname="ns14:PointEtatContractuelCodeType" serializer="org.apache.axis.encoding.ser.EnumSerializerFactory" type="java:fr.enedis.www.sge.b2b.dictionnaire.v5_0.ds.PointEtatContractuelCodeType" xmlns:ns14="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/ds"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns15:InfoDemandeurType" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:fr.enedis.www.sge.b2b.technique.v1_0.InfoDemandeurType" xmlns:ns15="http://www.enedis.fr/sge/b2b/technique/v1.0"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" qname="ns16:ErreurCommentaireType" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory" type="java:org.apache.axis.types.NormalizedString" xmlns:ns16="http://www.enedis.fr/sge/b2b/technique/v1.0"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" qname="ns17:ResultatType" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory" type="java:fr.enedis.www.sge.b2b.technique.v1_0.ResultatType" xmlns:ns17="http://www.enedis.fr/sge/b2b/technique/v1.0"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns18:ErreurType" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:fr.enedis.www.sge.b2b.technique.v1_0.ErreurType" xmlns:ns18="http://www.enedis.fr/sge/b2b/technique/v1.0"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" qname="ns19:ResultatCodeType" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory" type="java:org.apache.axis.types.NormalizedString" xmlns:ns19="http://www.enedis.fr/sge/b2b/technique/v1.0"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" qname="ns20:StructureComptageCodeType" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory" type="java:org.apache.axis.types.NormalizedString" xmlns:ns20="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/ds"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns21:PointEtatContractuelType" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:fr.enedis.www.sge.b2b.dictionnaire.v5_0.dc.PointEtatContractuelType" xmlns:ns21="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/dc"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" qname="ns22:CodePostalFrancaisType" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory" type="java:org.apache.axis.types.NormalizedString" xmlns:ns22="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/ds"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns23:StructureComptageType" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:fr.enedis.www.sge.b2b.dictionnaire.v5_0.dc.StructureComptageType" xmlns:ns23="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/dc"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory" encodingStyle="" qname="ns24:DomaineTensionCodeType" serializer="org.apache.axis.encoding.ser.EnumSerializerFactory" type="java:fr.enedis.www.sge.b2b.dictionnaire.v5_0.ds.DomaineTensionCodeType" xmlns:ns24="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/ds"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" qname="ns25:AdresseEmailType" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory" type="java:org.apache.axis.types.NormalizedString" xmlns:ns25="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/ds"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" qname="ns26:UtilisateurLoginType" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory" type="java:fr.enedis.www.sge.b2b.dictionnaire.v5_0.ds.UtilisateurLoginType" xmlns:ns26="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/ds"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.EnumDeserializerFactory" encodingStyle="" qname="ns27:ClientFinalCategorieCodeType" serializer="org.apache.axis.encoding.ser.EnumSerializerFactory" type="java:fr.enedis.www.sge.b2b.dictionnaire.v5_0.ds.ClientFinalCategorieCodeType" xmlns:ns27="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/ds"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns28:AdresseInstallationType" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:fr.enedis.www.sge.b2b.services.rechercherpoint.v2_0.AdresseInstallationType" xmlns:ns28="http://www.enedis.fr/sge/b2b/services/rechercherpoint/v2.0"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.SimpleDeserializerFactory" encodingStyle="" qname="ns29:EtablissementNumSiretType" serializer="org.apache.axis.encoding.ser.SimpleSerializerFactory" type="java:org.apache.axis.types.NormalizedString" xmlns:ns29="http://www.enedis.fr/sge/b2b/dictionnaire/v5.0/ds"/>
+  <ns1:arrayMapping innerType="ns30:PointType" languageSpecificType="java:fr.enedis.www.sge.b2b.services.rechercherpoint.v2_0.PointType[]" qname="ns30:PointsType" xmlns:ns30="http://www.enedis.fr/sge/b2b/services/rechercherpoint/v2.0"/>
+ </ns1:service>
+ <ns1:transport name="http">
+  <ns1:requestFlow>
+   <ns1:handler type="URLMapper"/>
+   <ns1:handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler"/>
+  </ns1:requestFlow>
+  <ns1:parameter name="qs:list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs:wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+  <ns1:parameter name="qs.list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs.method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs:method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs.wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+ </ns1:transport>
+ <ns1:transport name="local">
+  <ns1:responseFlow>
+   <ns1:handler type="LocalResponder"/>
+  </ns1:responseFlow>
+ </ns1:transport>
+</ns1:deployment>
